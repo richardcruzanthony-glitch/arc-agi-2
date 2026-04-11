@@ -1,0 +1,102 @@
+[
+  {
+    "puzzle_id": "0d3d703e",
+    "difficulty": "EASY",
+    "pattern_name": "Value Substitution",
+    "rule_description": "Each unique color in the input grid is mapped to a specific new color in the output grid based on a consistent substitution table.",
+    "algorithm": "1. Identify all unique non-zero values in the input grid. 2. Compare input/output pairs to build a mapping table (e.g., 3 -> 4, 1 -> 5). 3. Apply this mapping to the test input grid.",
+    "common_mistakes": "Assuming the mapping is the same for all puzzles; it is unique per puzzle ID.",
+    "correct_output_format": "Same dimensions as input, values 0-9.",
+    "example_solution": "Input: [[3, 3], [1, 1]], Rule: {3: 4, 1: 5}, Output: [[4, 4], [5, 5]]"
+  },
+  {
+    "puzzle_id": "25d8a9c8",
+    "difficulty": "EASY",
+    "pattern_name": "Uniform-row detection",
+    "rule_description": "The output is a 1xN or Nx1 grid where each cell represents whether the corresponding row/column in the input was uniform (all same color).",
+    "algorithm": "1. For each row in the input, check if all cells have the same value. 2. If uniform, output value A; if not, output value B. 3. The output dimensions are determined by the number of rows/columns being checked.",
+    "common_mistakes": "Misidentifying which value represents 'uniform' vs 'mixed'.",
+    "correct_output_format": "Reduced dimensions (e.g., 3x1), values 0-9.",
+    "example_solution": "Input: [[5, 5], [5, 2]], Rule: Uniform=1, Mixed=0, Output: [[1], [0]]"
+  },
+  {
+    "puzzle_id": "3c9b0459",
+    "difficulty": "EASY",
+    "pattern_name": "Horizontal mirror / reflection",
+    "rule_description": "The input grid is reflected across a horizontal axis (top becomes bottom).",
+    "algorithm": "1. Reverse the order of the rows in the grid. 2. Row 0 becomes Row N-1, Row 1 becomes Row N-2, etc.",
+    "common_mistakes": "Confusing horizontal reflection (flipping rows) with vertical reflection (flipping columns).",
+    "correct_output_format": "Same dimensions as input, values 0-9.",
+    "example_solution": "Input: [[1, 2], [3, 4]], Rule: Horizontal Flip, Output: [[3, 4], [1, 2]]"
+  },
+  {
+    "puzzle_id": "25ff71a9",
+    "difficulty": "EASY",
+    "pattern_name": "Gravity — shapes fall to bottom",
+    "rule_description": "All non-zero cells 'fall' towards the bottom of the grid, stacking on top of each other or the bottom edge, preserving their column-wise order.",
+    "algorithm": "1. For each column, extract all non-zero values. 2. Count the number of zeros. 3. Create a new column with all zeros at the top and the extracted non-zero values at the bottom in their original relative order.",
+    "common_mistakes": "Changing the relative order of colors within a column or losing values during the 'fall'.",
+    "correct_output_format": "Same dimensions as input, values 0-9.",
+    "example_solution": "Input: [[1, 0], [0, 0], [2, 0]], Rule: Gravity Down, Output: [[0, 0], [1, 0], [2, 0]]"
+  },
+  {
+    "puzzle_id": "007bbfb7",
+    "difficulty": "MEDIUM",
+    "pattern_name": "Self-similar fractal tiling",
+    "rule_description": "The input pattern is used as a template. Each non-zero cell in the template is replaced by a full copy of the template itself.",
+    "algorithm": "1. Let the input be a 3x3 pattern. 2. Create an output grid of size (input_rows * input_rows) x (input_cols * input_cols). 3. For each cell (r, c) in the input: if it's non-zero, place a copy of the input grid at the corresponding block in the output; if it's zero, place a zero-filled block.",
+    "common_mistakes": "Filling blocks with a solid color instead of the pattern copy.",
+    "correct_output_format": "Squared dimensions (e.g., 3x3 -> 9x9), values 0-9.",
+    "example_solution": "Input: [[1, 0], [0, 1]], Rule: Fractal, Output: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]"
+  },
+  {
+    "puzzle_id": "dc1df850",
+    "difficulty": "MEDIUM",
+    "pattern_name": "Surround each 2 with ring of 1s",
+    "rule_description": "Every instance of a specific 'target' value is surrounded by a 3x3 ring of a 'border' value.",
+    "algorithm": "1. Locate all cells with value 2. 2. For each such cell, change all 8 neighboring cells (horizontal, vertical, diagonal) to value 1, unless they are already occupied by a non-zero value that isn't 0.",
+    "common_mistakes": "Missing diagonal neighbors or overwriting other important features.",
+    "correct_output_format": "Same dimensions as input, values 0-9.",
+    "example_solution": "Input: [[0, 0, 0], [0, 2, 0], [0, 0, 0]], Rule: Surround 2 with 1s, Output: [[1, 1, 1], [1, 2, 1], [1, 1, 1]]"
+  },
+  {
+    "puzzle_id": "0520fde7",
+    "difficulty": "MEDIUM",
+    "pattern_name": "XOR / intersection mask across divider",
+    "rule_description": "The grid is split by a divider (row or column). The two halves are combined using a logical operation like XOR.",
+    "algorithm": "1. Identify the divider (e.g., a solid gray line). 2. Extract the two patterns on either side. 3. Compare them cell-by-cell: if only one has a non-zero value, keep it (XOR); if both have it, set to 0.",
+    "common_mistakes": "Misaligning the two halves or using the wrong logical operator (OR instead of XOR).",
+    "correct_output_format": "Dimensions of one half, values 0-9.",
+    "example_solution": "Input: [[1, 0], [5, 5], [1, 1]], Rule: XOR halves across row 1, Output: [[0, 1]]"
+  },
+  {
+    "puzzle_id": "08ed6ac7",
+    "difficulty": "MEDIUM",
+    "pattern_name": "Height-rank colouring of vertical bars",
+    "rule_description": "Vertical bars are colored based on their height relative to other bars in the grid.",
+    "algorithm": "1. Measure the height of each vertical bar. 2. Rank the heights from tallest to shortest. 3. Assign a specific color to each rank (e.g., tallest = red, second = blue).",
+    "common_mistakes": "Incorrectly counting height or failing to handle bars of equal height.",
+    "correct_output_format": "Same dimensions as input, values 0-9.",
+    "example_solution": "Input: [[0, 1], [1, 1]], Rule: Height 1=Blue, Height 2=Red, Output: [[0, 2], [2, 2]]"
+  },
+  {
+    "puzzle_id": "6ecd11f4",
+    "difficulty": "HARD",
+    "pattern_name": "Extract marked sub-pattern from tiled grid",
+    "rule_description": "The input is a large tiled grid. One specific tile is 'marked' (e.g., by a different color or a border). Extract that specific tile.",
+    "algorithm": "1. Detect the repeating tile size. 2. Scan all tiles to find the one that deviates from the pattern or contains a specific marker. 3. Extract and return only that tile.",
+    "common_mistakes": "Extracting the wrong tile or failing to identify the marker.",
+    "correct_output_format": "Dimensions of a single tile, values 0-9.",
+    "example_solution": "Input: 9x9 tiled 3x3s, one has a red dot. Rule: Extract marked, Output: 3x3 tile with dot."
+  },
+  {
+    "puzzle_id": "ff805c23",
+    "difficulty": "HARD",
+    "pattern_name": "Locate coloured region inside tiled mosaic",
+    "rule_description": "A complex mosaic contains a hidden or highlighted region. The goal is to isolate this region based on its unique color properties.",
+    "algorithm": "1. Identify the background mosaic pattern. 2. Find the contiguous region of cells that break the background pattern. 3. Extract the bounding box of this unique region.",
+    "common_mistakes": "Including background noise in the extraction or miscalculating the bounding box.",
+    "correct_output_format": "Dimensions of the unique region, values 0-9.",
+    "example_solution": "Input: Large mosaic with a small 4x4 unique shape. Rule: Extract unique, Output: 4x4 shape."
+  }
+]
